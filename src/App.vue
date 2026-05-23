@@ -1,7 +1,5 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <HelloWorld />
+  <h1 class="text-4xl font-bold text-blue-500">
+    Tech Nest
+  </h1>
 </template>
