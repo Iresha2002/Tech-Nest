@@ -1,13 +1,23 @@
 <script setup lang="ts">
-const handleClick = () => {
-  console.log(`Added ${props.title}`)
-}
+import { useCartStore } from '../stores/cartStore'
+
 const props = defineProps<{
+  id: number
   title: string
   price: number
   image: string
 }>()
 
+const cartStore = useCartStore()
+
+const handleClick = () => {
+  cartStore.addToCart({
+    id: props.id,
+    title: props.title,
+    price: props.price,
+    image: props.image,
+  })
+}
 </script>
 
 <template>

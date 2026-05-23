@@ -36,14 +36,15 @@ onMounted(() => {
     </h1>
 
     <div class="grid grid-cols-3 gap-5">
-
-      <ProductCard
-        v-for="product in products"
-        :key="product.id"
-        :title="product.title"
-        :price="product.price"
-        :image="product.thumbnail"
-      />
+        
+<ProductCard
+  v-for="product in products"
+  :key="product.id"
+  :id="product.id"
+  :title="product.title"
+  :price="product.price"
+  :image="product.thumbnail"
+/>
 
     </div>
 
