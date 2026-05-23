@@ -1,6 +1,8 @@
 <script setup lang="ts">
-
-defineProps<{
+const handleClick = () => {
+  console.log(`Added ${props.title}`)
+}
+const props = defineProps<{
   title: string
   price: number
   image: string
@@ -24,6 +26,12 @@ defineProps<{
     <p class="text-green-500">
       $ {{ price }}
     </p>
+     <button
+     @click="handleClick"
+      class="bg-blue-500 text-white px-4 py-2 rounded"
+    >
+      Add to Cart
+    </button>
 
   </div>
 
