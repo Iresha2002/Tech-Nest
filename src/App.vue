@@ -1,14 +1,11 @@
+<script setup lang="ts">
+import NavBar from './components/NavBar.vue'
+</script>
+
 <template>
   <div>
-  <nav class="p-5 bg-gray-800 text-white flex gap-5">
-    
-    <RouterLink to="/">Home</RouterLink>
+    <NavBar />
 
-    <RouterLink to="/cart">Cart</RouterLink>
-
-    <RouterLink to="/login">Login</RouterLink>
-
-  </nav>
     <RouterView />
   </div>
 </template>
