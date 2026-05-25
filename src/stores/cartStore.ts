@@ -10,10 +10,18 @@ type CartItem = {
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    items: [] as CartItem[],
+    items: JSON.parse(localStorage.getItem('cart') || '[]') as CartItem[],
   }),
 
   actions: {
+      saveCart() {
+
+      localStorage.setItem(
+        'cart',
+        JSON.stringify(this.items)
+      )
+
+    },
    addToCart(product: CartItem) {
 
   const existingItem = this.items.find(
@@ -33,7 +41,7 @@ export const useCartStore = defineStore('cart', {
 
   }
 
-  console.log(this.items)
+      this.saveCart()
 
 
     },
