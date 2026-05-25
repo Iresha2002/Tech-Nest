@@ -5,6 +5,7 @@ type CartItem = {
   title: string
   price: number
   image: string
+  quantity: number
 }
 
 export const useCartStore = defineStore('cart', {
@@ -13,9 +14,28 @@ export const useCartStore = defineStore('cart', {
   }),
 
   actions: {
-    addToCart(product: CartItem) {
-      this.items.push(product)
-      console.log(this.items)
+   addToCart(product: CartItem) {
+
+  const existingItem = this.items.find(
+    item => item.id === product.id
+  )
+
+  if (existingItem) {
+
+    existingItem.quantity++
+
+  } else {
+
+    this.items.push({
+      ...product,
+      quantity: 1,
+    })
+
+  }
+
+  console.log(this.items)
+
+
     },
   },
 })

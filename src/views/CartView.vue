@@ -11,6 +11,14 @@ const removeItem = (id: number) => {
   )
 
 }
+const totalPrice = () => {
+
+  return cartStore.items.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  )
+
+}
 
 </script>
 
@@ -47,14 +55,15 @@ const removeItem = (id: number) => {
         <div class="flex-1">
 
           <h2 class="text-2xl font-bold">
-            {{ item.title }}
+            {{ item.title }} × {{ item.quantity }}
           </h2>
 
           <p class="text-green-500">
-            $ {{ item.price }}
+            $ {{ item.price }} x {{ item.quantity }} = $ {{ item.price * item.quantity }}
           </p>
 
         </div>
+        
 
         <button
           @click="removeItem(item.id)"
@@ -66,7 +75,13 @@ const removeItem = (id: number) => {
       </div>
 
     </div>
+    <div class="mt-10 text-3xl font-bold">
+
+  Total: $ {{ totalPrice() }}
+
+</div>
 
   </div>
+  
 
 </template>
