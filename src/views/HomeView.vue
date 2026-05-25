@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import { ref, onMounted, computed } from 'vue'
 import ProductCard from '../components/ProductCard.vue'
 
@@ -9,36 +8,46 @@ type Product = {
   price: number
   thumbnail: string
 }
+
 const products = ref<Product[]>([])
 const search = ref('')
 
 const fetchProducts = async () => {
+  const categories = [
+    'smartphones',
+    'laptops',
+    'tablets',
+    'mobile-accessories',
+  ]
 
-  const response = await fetch('https://dummyjson.com/products')
+  const responses = await Promise.all(
+    categories.map(category =>
+      fetch(`https://dummyjson.com/products/category/${category}`)
+    )
+  )
 
-  const data = await response.json()
+  const data = await Promise.all(
+    responses.map(response => response.json())
+  )
 
-  products.value = data.products
+  products.value = []
 
+  data.forEach(item => {
+    products.value.push(...item.products)
+  })
 }
 
-
 const filteredProducts = computed(() => {
-
   return products.value.filter(product =>
-
     product.title
       .toLowerCase()
       .includes(search.value.toLowerCase())
-
   )
-
 })
 
 onMounted(() => {
   fetchProducts()
 })
-
 </script>
 
 <template>
