@@ -19,6 +19,17 @@ const totalPrice = () => {
   )
 
 }
+const increase = (id: number) => {
+
+  cartStore.increaseQuantity(id)
+
+}
+
+const decrease = (id: number) => {
+
+  cartStore.decreaseQuantity(id)
+
+}
 
 </script>
 
@@ -55,8 +66,30 @@ const totalPrice = () => {
         <div class="flex-1">
 
           <h2 class="text-2xl font-bold">
-            {{ item.title }} × {{ item.quantity }}
-          </h2>
+  {{ item.title }}
+</h2>
+
+<div class="flex items-center gap-3 mt-2">
+
+  <button
+    @click="decrease(item.id)"
+    class="bg-red-500 text-white px-3 py-1 rounded"
+  >
+    -
+  </button>
+
+  <span class="text-xl">
+    {{ item.quantity }}
+  </span>
+
+  <button
+    @click="increase(item.id)"
+    class="bg-green-500 text-white px-3 py-1 rounded"
+  >
+    +
+  </button>
+
+</div>
 
           <p class="text-green-500">
             $ {{ item.price }} x {{ item.quantity }} = $ {{ item.price * item.quantity }}

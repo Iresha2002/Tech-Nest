@@ -24,20 +24,25 @@ const handleClick = () => {
 
   <div class="border p-5 rounded">
 
-    <img
-      :src="image"
-      class="h-40 w-full object-cover"
-    />
+    <RouterLink :to="`/product/${id}`">
 
-    <h2 class="text-2xl font-bold mt-3">
-      {{ title }}
-    </h2>
+      <img
+        :src="image"
+        class="h-40 w-full object-cover"
+      />
 
-    <p class="text-green-500">
-      $ {{ price }}
-    </p>
-     <button
-     @click="handleClick"
+      <h2 class="text-2xl font-bold mt-3">
+        {{ title }}
+      </h2>
+
+      <p class="text-green-500 mb-3">
+        $ {{ price }}
+      </p>
+
+    </RouterLink>
+
+    <button
+      @click="handleClick"
       class="bg-blue-500 text-white px-4 py-2 rounded"
     >
       Add to Cart

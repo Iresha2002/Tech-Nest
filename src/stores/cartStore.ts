@@ -22,7 +22,7 @@ export const useCartStore = defineStore('cart', {
       )
 
     },
-   addToCart(product: CartItem) {
+   addToCart(product: Omit<CartItem, 'quantity'>){
 
   const existingItem = this.items.find(
     item => item.id === product.id
@@ -40,10 +40,47 @@ export const useCartStore = defineStore('cart', {
     })
 
   }
-
-      this.saveCart()
+    this.saveCart()
 
 
     },
+  increaseQuantity(id: number) {
+
+  const item = this.items.find(
+    item => item.id === id
+  )
+
+  if (item) {
+
+    item.quantity++
+
+    this.saveCart()
+
+  }
+
+},
+decreaseQuantity(id: number) {
+
+  const item = this.items.find(
+    item => item.id === id
+  )
+
+  if (item && item.quantity > 1) {
+
+    item.quantity--
+
+  } else {
+
+    this.items = this.items.filter(
+      item => item.id !== id
+    )
+
+  }
+
+  this.saveCart()
+
+},
+
+    
   },
 })

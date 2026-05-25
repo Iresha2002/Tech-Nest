@@ -6,7 +6,7 @@ import CategoriesView from '../views/CategoriesView.vue'
 import DealsView from '../views/DealsView.vue'  
 import ProductDetails from '../views/ProductDetails.vue'
 import Support from '../views/Support.vue'
-import path from 'path/win32'
+
 
 const routes = [
   {
@@ -36,12 +36,14 @@ const routes = [
      component: DealsView
 
 },
-  {
-     path: '/productdeatail',
-     name: 'productdeatail',
-     component: ProductDetails
-
+  
+     {
+  path: '/product/:id',
+  name: 'product-details',
+  component: ProductDetails
 },
+
+
   {
      path: '/support',
      name: 'support',
