@@ -1,7 +1,9 @@
 <script setup lang="ts">
 
 import { useCartStore } from '../stores/cartStore'
+import { useSearchStore } from '../stores/searchStore'
 
+const searchStore = useSearchStore()
 const cartStore = useCartStore()
 
 </script>
@@ -9,12 +11,12 @@ const cartStore = useCartStore()
 <template>
   <!-- Top Bar -->
 <div class="bg-gray-100 border-b border-gray-200 text-gray-600 px-6 py-2 flex items-center justify-between text-sm">
-  <div class="flex items-center gap-3">
-    <span class="text-gray-900 font-bold text-sm">
+  <div class="flex items-center gap-3 px-4">
+    <span class="text-gray-900 font-bold text-sm ">
       TechNest
     </span>
 
-    <span class="text-gray-400 text-sm">
+    <span class="text-gray-400 text-sm ">
       Gadget Store
     </span>
   </div>
@@ -23,7 +25,7 @@ const cartStore = useCartStore()
     Dark mode
   </button>
 </div>
-<nav  class=" bg-white border-b border-gray-200 sticky top-0 z-50">
+<nav  class=" bg-white border-b border-gray-200 sticky top-0 z-100">
     <div class="max-w-7xl mx-auto px-6">
             <div class="flex items-center h-[72px] gap-6">
 
@@ -76,6 +78,7 @@ const cartStore = useCartStore()
             type="text"
             placeholder="Search gadgets..."
             class="w-72 pl-4 pr-10 py-2.5 text-sm border rounded-xl bg-gray-50 border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400"
+            v-model="searchStore.search"
           />
         </div>
 

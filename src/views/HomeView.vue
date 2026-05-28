@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import ProductCard from '../components/ProductCard.vue'
+import { useSearchStore } from '../stores/searchStore'
+
+const searchStore = useSearchStore()
 
 type Product = {
   id: number
@@ -10,7 +13,7 @@ type Product = {
 }
 
 const products = ref<Product[]>([])
-const search = ref('')
+          // const search = ref('')
 
 const fetchProducts = async () => {
   const categories = [
@@ -41,7 +44,7 @@ const filteredProducts = computed(() => {
   return products.value.filter(product =>
     product.title
       .toLowerCase()
-      .includes(search.value.toLowerCase())
+      .includes(searchStore.search.toLowerCase())
   )
 })
 
@@ -52,9 +55,9 @@ onMounted(() => {
 
 <template>
 
-  <div class="p-10">
+  <!-- <div class="p-10">
     <input
-  v-model="search"
+  v-model="searchStore.search"
   type="text"
   placeholder="Search products..."
   class="border p-3 rounded w-full mb-5"
@@ -62,9 +65,9 @@ onMounted(() => {
 
     <h1 class="text-4xl font-bold mb-5">
       Products
-    </h1>
+    </h1> -->
 
-    <div class="grid grid-cols-3 gap-5">
+    <div class="grid grid-cols-3 gap-5 px-10 mt-10">
         
 <ProductCard
   v-for="product in filteredProducts"
@@ -78,6 +81,6 @@ onMounted(() => {
     </div>
     
 
-  </div>
+  <!-- </div> -->
 
 </template>
