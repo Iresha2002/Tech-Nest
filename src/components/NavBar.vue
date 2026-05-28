@@ -7,6 +7,22 @@ const cartStore = useCartStore()
 </script>
 
 <template>
+  <!-- Top Bar -->
+<div class="bg-gray-100 border-b border-gray-200 text-gray-600 px-6 py-2 flex items-center justify-between text-sm">
+  <div class="flex items-center gap-3">
+    <span class="text-gray-900 font-bold text-sm">
+      TechNest
+    </span>
+
+    <span class="text-gray-400 text-sm">
+      Gadget Store
+    </span>
+  </div>
+
+  <button class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-1.5 rounded-lg text-sm font-medium">
+    Dark mode
+  </button>
+</div>
 <nav  class=" bg-white border-b border-gray-200 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6">
             <div class="flex items-center h-[72px] gap-6">
