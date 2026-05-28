@@ -25,9 +25,11 @@ const cartStore = useCartStore()
     Dark mode
   </button>
 </div>
+
+  
 <nav  class=" bg-white border-b border-gray-200 sticky top-0 z-100">
     <div class="max-w-7xl mx-auto px-6">
-            <div class="flex items-center h-[72px] gap-6">
+            <div class="flex items-center h-[72px] gap-10">
 
      <RouterLink to="/" class="flex items-center gap-3 shrink-0">
           <div class="w-11 h-11 rounded-xl bg-gray-900 flex items-center justify-center shrink-0">
@@ -73,7 +75,7 @@ const cartStore = useCartStore()
           </RouterLink>
         </div>
 
-       <div class="relative">
+       <div class="relative ml-auto">
           <input
             type="text"
             placeholder="Search gadgets..."
@@ -89,12 +91,12 @@ const cartStore = useCartStore()
           🛒 Cart ({{ cartStore.items.length }})
         </RouterLink>
 
-        <RouterLink
+        <!-- <RouterLink
           to="/login"
           class="border border-gray-300 text-gray-700 hover:text-gray-900 px-4 py-2 rounded-xl text-sm font-medium"
         >
           Login
-        </RouterLink>
+        </RouterLink> -->
 
         <RouterLink
           to="/login?tab=signup"

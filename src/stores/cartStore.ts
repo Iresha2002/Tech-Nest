@@ -80,6 +80,15 @@ decreaseQuantity(id: number) {
   this.saveCart()
 
 },
+removeFromCart(id: number) {
+
+  this.items = this.items.filter(
+    item => item.id !== id
+  )
+
+  this.saveCart()
+
+},
 
     
   },

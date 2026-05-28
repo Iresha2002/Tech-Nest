@@ -10,6 +10,7 @@ type Product = {
   title: string
   price: number
   thumbnail: string
+  rating: number
 }
 
 const products = ref<Product[]>([])
@@ -65,7 +66,7 @@ onMounted(() => {
 <template>
   <!-- Hero Section -->
 
-<section class="max-w-7xl mx-auto px-6 py-16 mb-160" id="hero">
+<section class="max-w-7xl mx-auto px-6 py-16 mb-16" id="hero">
   <div class="grid grid-cols-2 gap-16 items-center">
 
     <!-- Left Side -->
@@ -151,8 +152,8 @@ onMounted(() => {
     </h1> -->
 <section id="products" class="border-t border-gray-100">
 
-    <div class="grid grid-cols-3 gap-5 px-10 mt-10">
-        
+<div class="grid grid-cols-4 gap-5 max-w-7xl mx-auto px-6 py-10">
+
 <ProductCard
   v-for="product in filteredProducts"
   :key="product.id"
@@ -160,6 +161,7 @@ onMounted(() => {
   :title="product.title"
   :price="product.price"
   :image="product.thumbnail"
+  :rating="product.rating"
 />
 
     </div>
