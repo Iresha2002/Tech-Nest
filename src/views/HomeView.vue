@@ -11,6 +11,7 @@ type Product = {
   price: number
   thumbnail: string
   rating: number
+  discountPercentage: number
 }
 
 const products = ref<Product[]>([])
@@ -162,6 +163,7 @@ onMounted(() => {
   :price="product.price"
   :image="product.thumbnail"
   :rating="product.rating"
+  :discountPercentage="product.discountPercentage"
 />
 
     </div>

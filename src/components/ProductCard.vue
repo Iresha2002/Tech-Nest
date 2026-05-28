@@ -8,6 +8,8 @@ const props = defineProps<{
   price: number
   image: string
   rating: number
+  discountPercentage: number
+
 }>()
 
 const cartStore = useCartStore()
@@ -54,7 +56,15 @@ const handleClick = () => {
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         loading="lazy"
       />
+      <div
+  v-if="discountPercentage > 10"
+  class="absolute top-2.5 left-2.5 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-lg"
+>
+  -{{ Math.round(discountPercentage) }}%
+</div>
+      
       </div>
+      
     </RouterLink>
 
     <!-- details area -->
