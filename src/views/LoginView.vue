@@ -1,5 +1,167 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/authStore'
+
+const router = useRouter()
+const authStore = useAuthStore()
+
+const activeTab = ref('login')
+const signupError = ref('')
+const loginForm = ref({
+  username: '',
+  password: '',
+})
+
+const signupForm = ref({
+  firstName: '',
+  lastName: '',
+  email: '',
+  username: '',
+  password: '',
+  confirm: ''
+})
+
+
+async function handleLogin() {
+  
+    const ok = await authStore.login(loginForm.value.username, loginForm.value.password)
+    if (ok) {
+      router.push('/')
+    }
+  } 
+  
+  async function handleSignup() {
+    if (signupForm.value.password !== signupForm.value.confirm) {
+      signupError.value = 'Passwords do not match'
+      return
+    }
+    const ok = await authStore.signup(
+      signupForm.value.firstName,
+      signupForm.value.lastName,
+      signupForm.value.email,
+      signupForm.value.username,
+      signupForm.value.password
+    )
+    console.log('signup result:', ok)
+    if (ok) {
+      activeTab.value = 'login'
+    }
+  }
+
+</script>
 <template>
-  <div>
-    Cart Page
+      <div class="min-h-screen flex items-center justify-center bg-gray-50">
+     <div class="bg-white border border-gray-200 rounded-2xl p-8 w-full max-w-sm">
+  
+
+<!-- tab switcher — no v-if here, both buttons always show -->
+<div class="flex bg-gray-100 rounded-xl p-1 mb-6">
+  <button
+    @click="activeTab = 'login'"
+    class="flex-1 py-2 text-sm rounded-lg transition-all"
+    :class="activeTab === 'login' ? 'bg-white font-bold text-gray-900 shadow-sm' : 'text-gray-500'"
+  >Login</button>
+
+  <button
+    @click="activeTab = 'signup'"
+    class="flex-1 py-2 text-sm rounded-lg transition-all"
+    :class="activeTab === 'signup' ? 'bg-white font-bold text-gray-900 shadow-sm' : 'text-gray-500'"
+  >Sign Up</button>
+</div>
+
+<!-- form changes here -->
+<div v-if="activeTab === 'login'">
+<h1 class="text-xl font-black text-gray-900 mb-1">Welcome back</h1>
+  <p class="text-sm text-gray-400 mb-5">Sign in to your account</p>
+
+  <div v-if="authStore.error"
+    class="bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-xl mb-4">
+  {{ authStore.error }} 
   </div>
+
+  <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+  <input
+    v-model="loginForm.username"
+    type="text"
+    class="w-full border border-gray-300 rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+
+    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+  <input 
+    v-model="loginForm.password"
+    type="password"
+    class="w-full border border-gray-300 rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+  
+    <button
+    @click="handleLogin" :disabled="authStore.isLoading" class="w-full bg-gray-900 text-white py-2 rounded-xl font-semibold hover:bg-gray-700 transition disabled:opacity-50">
+
+
+    {{ authStore.isLoading ? 'Logging in...' : 'Login' }}
+    </button>
+  
+  <p class="text-sm text-gray-600 text-center mt-4">
+    No account?
+    <button @click="activeTab = 'signup'" class="text-sm text-gray-800 font-semibold hover:underline">Sign up</button>
+  </p>
+</div>
+
+<div v-else>
+  <h1 class="text-xl font-black text-gray-900 mb-1">Create an account</h1>
+  <p class="text-sm text-gray-400 mb-5">Sign up to get started</p>
+
+  <div v-if="signupError"
+    class="bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-xl mb-4">
+  {{ signupError }}
+  </div>
+
+  <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+  <input 
+    v-model="signupForm.firstName"
+    type="text"
+    class="w-full border border-gray-300 rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+
+  <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+  <input 
+    v-model="signupForm.lastName"
+    type="text"
+    class="w-full border border-gray-300 rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+
+  <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+  <input 
+    v-model="signupForm.email"
+    type="email"
+    class="w-full border border-gray-300 rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+
+  <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+  <input 
+    v-model="signupForm.username"
+    type="text"
+    class="w-full border border-gray-300 rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+    
+  <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+  <input 
+    v-model="signupForm.password"
+    type="password"
+    class="w-full border border-gray-300 rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+    
+  <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+  <input 
+    v-model="signupForm.confirm"
+    type="password"
+    class="w-full border border-gray-300 rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+
+  <button
+    @click="handleSignup" :disabled="authStore.isLoading" class="w-full bg-gray-900 text-white py-2 rounded-xl font-semibold hover:bg-gray-700 transition disabled:opacity-50">
+    {{ authStore.isLoading ? 'Signing up...' : 'Sign Up' }}
+  </button>
+
+  <p class="text-sm text-gray-600 text-center mt-4">
+    Already have an account?
+    <button @click="activeTab = 'login'" class="text-sm text-gray-800 font-semibold hover:underline">Sign in</button>
+  </p>
+
+</div>
+
+     </div>
+      </div>
 </template>

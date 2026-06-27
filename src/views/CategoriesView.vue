@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import ProductCard from '../components/ProductCard.vue'
-
-type Product = {
-  id: number
-  title: string
-  price: number
-  thumbnail: string
-  rating: number
-}
+import type { Product } from '../types'
+// type Product = {
+//   id: number
+//   title: string
+//   price: number
+//   thumbnail: string
+//   rating: number
+// }
 const categories = [
   {
     label: 'Smartphones',

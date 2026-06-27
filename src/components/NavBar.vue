@@ -2,7 +2,8 @@
 
 import { useCartStore } from '../stores/cartStore'
 import { useSearchStore } from '../stores/searchStore'
-
+import { useAuthStore } from '../stores/authStore'
+const authStore = useAuthStore()
 const searchStore = useSearchStore()
 const cartStore = useCartStore()
 
@@ -97,13 +98,21 @@ const cartStore = useCartStore()
         >
           Login
         </RouterLink> -->
-
-        <RouterLink
-          to="/login?tab=signup"
-          class="bg-gray-900 text-white hover:bg-gray-800 px-4 py-2 rounded-xl text-sm font-bold"
-        >
-          Sign up
-        </RouterLink>
+        
+        <div v-if="authStore.isLoggedIn" class="flex items-center gap-3">
+  <span class="text-sm font-medium text-gray-700">Hi, {{ authStore.user?.firstName }}</span>
+  <button @click="authStore.logout()" class="bg-gray-900 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-gray-700">
+    Logout
+  </button>
+</div>
+<div v-else>
+  <RouterLink
+    to="/login?tab=signup"
+    class="bg-gray-900 text-white hover:bg-gray-800 px-4 py-2 rounded-xl text-sm font-bold"
+  >
+    Sign up
+  </RouterLink>
+</div>
 
    </div>
     </div>

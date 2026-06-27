@@ -2,17 +2,17 @@
 import { ref, onMounted, computed } from 'vue'
 import ProductCard from '../components/ProductCard.vue'
 import { useSearchStore } from '../stores/searchStore'
-
+import type { Product } from '../types'
 const searchStore = useSearchStore()
 
-type Product = {
-  id: number
-  title: string
-  price: number
-  thumbnail: string
-  rating: number
-  discountPercentage: number
-}
+// type Product = {
+//   id: number
+//   title: string
+//   price: number
+//   thumbnail: string
+//   rating: number
+//   discountPercentage: number
+// }
 
 const products = ref<Product[]>([])
           // const search = ref('')
