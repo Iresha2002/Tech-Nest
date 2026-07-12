@@ -33,6 +33,8 @@ export interface CartItem {
   id: number
   title: string
   price: number
+  originalPrice: number
+  brand: string
   image: string
   quantity: number
 }

@@ -34,87 +34,68 @@ const decrease = (id: number) => {
 </script>
 
 <template>
+  <div class="max-w-6xl mx-auto px-6 py-10">
+    
+    <h1 class="text-3xl font-black text-gray-900 mb-1">Shopping Cart</h1>
+    <p class="text-sm text-gray-400 mb-8">{{ cartStore.items.length }} items</p>
 
-  <div class="p-10">
-
-    <h1 class="text-4xl font-bold mb-5">
-      Cart Page
-    </h1>
-
-    <div
-      v-if="cartStore.items.length === 0"
-    >
+    <div v-if="cartStore.items.length === 0" class="text-gray-400 text-center py-20">
       Your cart is empty.
     </div>
 
-    <div
-      v-else
-      class="space-y-5"
-    >
-
-      <div
-        v-for="item in cartStore.items"
-        :key="item.id"
-        class="border p-5 rounded flex gap-5 items-center"
-      >
-
-        <img
-          :src="item.image"
-          class="w-24 h-24 object-cover rounded"
-        />
-
-        <div class="flex-1">
-
-          <h2 class="text-2xl font-bold">
-  {{ item.title }}
-</h2>
-
-<div class="flex items-center gap-3 mt-2">
-
-  <button
-    @click="decrease(item.id)"
-    class="bg-red-500 text-white px-3 py-1 rounded"
-  >
-    -
-  </button>
-
-  <span class="text-xl">
-    {{ item.quantity }}
-  </span>
-
-  <button
-    @click="increase(item.id)"
-    class="bg-green-500 text-white px-3 py-1 rounded"
-  >
-    +
-  </button>
-
-</div>
-
-          <p class="text-green-500">
-            $ {{ item.price }} x {{ item.quantity }} = $ {{ item.price * item.quantity }}
-          </p>
-
-        </div>
-        
-
-        <button
-          @click="removeItem(item.id)"
-          class="bg-red-500 text-white px-4 py-2 rounded"
+    <div v-else class="flex gap-8 items-start">
+      
+      <!-- left: cart items -->
+      <div class="flex-1">
+        <div
+          v-for="item in cartStore.items"
+          :key="item.id"
+          class="bg-white border border-gray-200 rounded-2xl p-4 flex items-center gap-4 mb-3"
         >
-          Remove
+          <img :src="item.image" class="w-20 h-20 object-contain rounded-xl border border-gray-100" />
+          <div class="flex-1">
+            <p class="text-xs text-gray-400 mb-0.5">{{ item.brand }}</p>
+            <h2 class="font-bold text-gray-900">{{ item.title }}</h2>
+            <div class="flex items-center gap-2 mt-2">
+              <button @click="decrease(item.id)" class="w-7 h-7 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100">-</button>
+              <span class="text-sm font-semibold w-4 text-center">{{ item.quantity }}</span>
+              <button @click="increase(item.id)" class="w-7 h-7 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100">+</button>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="font-black text-gray-900">${{ item.price }}</p>
+            <p class="text-xs text-gray-400 line-through">${{ item.originalPrice }}</p>
+          </div>
+          <button @click="removeItem(item.id)" class="text-gray-300 hover:text-red-500 ml-2">🗑</button>
+        </div>
+      </div>
+      <!-- right: order summary -->
+      <div class="w-80 shrink-0 border border-gray-200 rounded-2xl p-6">
+        <h2 class="text-lg font-black text-gray-900 mb-4">Order Summary</h2>
+        <div class="flex justify-between text-sm mb-2">
+          <span class="text-gray-500">Subtotal ({{ cartStore.items.length }})</span>
+          <span class="font-semibold">${{ totalPrice().toFixed(2) }}</span>
+        </div>
+        <div class="flex justify-between text-sm mb-2">
+          <span class="text-green-600">You save</span>
+          <span class="text-green-600 font-semibold">-${{ (cartStore.items.reduce((t, i) => t + (i.originalPrice - i.price) * i.quantity, 0)).toFixed(2) }}</span>
+        </div>
+        <div class="flex justify-between text-sm mb-4">
+          <span class="text-gray-500">Shipping</span>
+          <span class="text-green-600 font-semibold">FREE 🎉</span>
+        </div>
+        <div class="flex justify-between font-black text-gray-900 text-lg border-t border-gray-200 pt-4 mb-6">
+          <span>Total</span>
+          <span>${{ totalPrice().toFixed(2) }}</span>
+        </div>
+        <button class="w-full bg-gray-900 text-white py-3 rounded-xl font-bold hover:bg-gray-700 mb-3">
+          Proceed to Checkout →
         </button>
-
+        <RouterLink to="/" class="block text-center text-sm text-gray-400 hover:text-gray-600">
+          ← Continue Shopping
+        </RouterLink>
       </div>
 
     </div>
-    <div class="mt-10 text-3xl font-bold">
-
-  Total: $ {{ totalPrice() }}
-
-</div>
-
   </div>
-  
-
 </template>

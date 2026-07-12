@@ -14,17 +14,17 @@ const selectedImage = ref('')
 const added = ref(false)
 const addProductToCart = () => {
   if (!product.value) return
-  cartStore.addToCart({
+  const cartItem = {
     id: product.value.id,
     title: product.value.title,
-    price: product.value.price,
+    price: product.value.price, 
     image: selectedImage.value || product.value.thumbnail,
-    
-  })
+    brand: product.value.brand,       
+    originalPrice: Math.round(product.value.price / (1 - product.value.discountPercentage / 100) * 100) / 100, 
+  }
+  console.log('cart item:', cartItem)
+  cartStore.addToCart(cartItem)
   added.value = true
-// setTimeout(() => {
-//   added.value = false
-// }, 2000)
 }
 const fetchProduct = async () => {
   isLoading.value = true
