@@ -9,6 +9,8 @@ const props = defineProps<{
   image: string
   rating: number
   discountPercentage: number
+  brand: string
+  originalPrice: number
 
 }>()
 
@@ -34,6 +36,8 @@ const handleClick = () => {
       title: props.title,
       price: props.price,
       image: props.image,
+      brand: props.brand, // You can set the brand if you have it in props
+      originalPrice: Math.round(props.price / (1 - props.discountPercentage / 100))
     })
 
   }
@@ -44,12 +48,12 @@ const handleClick = () => {
 <template>
 
   <article
-    class="bg-white border border-gray-200 hover:border-gray-400 hover:shadow-md rounded-2xl overflow-hidden cursor-pointer group transition-all duration-200 flex flex-col"
+    class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-500 hover:shadow-md rounded-2xl overflow-hidden cursor-pointer group transition-all duration-200 flex flex-col"
     
   >
     <!-- image area -->
     <RouterLink :to="`/product/${id}`">
-    <div class="bg-gray-50 relative aspect-square overflow-hidden">
+    <div class="bg-gray-50 dark:bg-gray-800 relative aspect-square overflow-hidden">
 
       <img
         :src="image"
@@ -72,7 +76,7 @@ const handleClick = () => {
 
     <div class="p-4 flex flex-col flex-1">
         
-      <h3 class="text-gray-900 group-hover:text-gray-600 font-semibold text-sm leading-snug mb-2 line-clamp-2 transition-colors">
+      <h3 class="text-gray-900 dark:text-white group-hover:text-gray-600 dark:group-hover:text-gray-300 font-semibold text-sm leading-snug mb-2 line-clamp-2 transition-colors">
         {{ title }}
       </h3>
           <div class="flex items-center gap-1 mb-3">
@@ -80,14 +84,14 @@ const handleClick = () => {
           <span
             v-for="i in 5"
             :key="i"
-            :class="i <= Math.round(rating) ? 'text-amber-400' : 'text-gray-200'"
+            :class="i <= Math.round(rating) ? 'text-amber-400' : 'text-gray-200 dark:text-gray-600'"
             class="text-xs"
           >
             ★
           </span>
         </div>
 
-        <span class="text-gray-400 text-xs">
+        <span class="text-gray-400 dark:text-gray-500 text-xs">
           {{ rating.toFixed(1) }}
         </span>
       </div>
@@ -95,11 +99,11 @@ const handleClick = () => {
 
 
       <div class="mt-auto flex items-center gap-3">
-       <p class="text-lg font-bold text-gray-700">
+       <p class="text-lg font-bold text-gray-700 dark:text-gray-200">
         ${{ price }}
        </p>
 
-       <p class="text-sm text-gray-400 line-through">
+       <p class="text-sm text-gray-400 dark:text-gray-500 line-through">
         ${{ Math.round(price * 1.2) }}
       </p>
       </div>

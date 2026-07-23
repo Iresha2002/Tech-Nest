@@ -2,13 +2,7 @@
 import { ref } from 'vue'
 import ProductCard from '../components/ProductCard.vue'
 import type { Product } from '../types'
-// type Product = {
-//   id: number
-//   title: string
-//   price: number
-//   thumbnail: string
-//   rating: number
-// }
+
 const categories = [
   {
     label: 'Smartphones',
@@ -65,11 +59,11 @@ const selectCategory = async (slug: string) => {
 <template>
   <main class="max-w-7xl mx-auto px-6 py-12">
     <div class="mb-10">
-      <h1 class="text-3xl font-black text-gray-900 mb-2">
+      <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
         Categories
       </h1>
 
-      <p class="text-base text-gray-500">
+      <p class="text-base text-gray-500 dark:text-gray-400">
         Phones, laptops, tablets, and computing accessories.
       </p>
     </div>
@@ -79,40 +73,35 @@ const selectCategory = async (slug: string) => {
   v-for="cat in categories"
   :key="cat.label"
   @click="selectCategory(cat.slug)"
-  class="bg-white border border-gray-200 hover:shadow-md rounded-2xl p-6 transition-all text-left"
+  class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-md rounded-2xl p-6 transition-all text-left"
 >
       
         <div class="text-3xl mb-3">
           {{ cat.icon }}
         </div>
 
-        <h3 class="font-black text-lg text-gray-900 mb-1">
+        <h3 class="font-black text-lg text-gray-900 dark:text-white mb-1">
           {{ cat.label }}
         </h3>
 
-        <p class="text-sm text-gray-500 mb-4">
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
           {{ cat.description }}
         </p>
 
         <div class="flex items-center justify-between">
-          <span class="text-xs text-gray-400">
+          <span class="text-xs text-gray-400 dark:text-gray-500">
             {{ cat.count }} products
           </span>
 
-          <span class="text-lg font-bold text-gray-500">
+          <span class="text-lg font-bold text-gray-500 dark:text-gray-400">
             ›
           </span>
           </div>
       </button>
         </div>
-        
-      
 
-    
-
-    
       <div v-if="products.length > 0" class="mt-10">
-  <h2 class="text-2xl font-black text-gray-900 mb-6">
+  <h2 class="text-2xl font-black text-gray-900 dark:text-white mb-6">
     Selected Category Products
   </h2>
 
@@ -129,8 +118,8 @@ const selectCategory = async (slug: string) => {
   </div>
 </div>
 
-<div class="bg-white border border-gray-200 rounded-2xl p-6 mt-16">
-      <h2 class="font-black text-lg text-gray-900 mb-5">
+<div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 mt-16">
+      <h2 class="font-black text-lg text-gray-900 dark:text-white mb-5">
         What's in each category?
       </h2>
 
@@ -139,11 +128,11 @@ const selectCategory = async (slug: string) => {
           v-for="cat in categories"
           :key="cat.label"
         >
-          <p class="font-bold text-sm text-gray-900 mb-2">
+          <p class="font-bold text-sm text-gray-900 dark:text-white mb-2">
             {{ cat.icon }} {{ cat.label }}
           </p>
 
-          <ul class="text-sm text-gray-500 space-y-1.5">
+          <ul class="text-sm text-gray-500 dark:text-gray-400 space-y-1.5">
             <li
               v-for="item in cat.items"
               :key="item"

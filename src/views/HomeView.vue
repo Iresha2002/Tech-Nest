@@ -72,15 +72,15 @@ onMounted(() => {
 
     <!-- Left Side -->
     <div>
-      <p class="text-sm text-gray-500 mb-4">
+      <p class="text-sm text-gray-500  dark:text-gray-400 mb-4">
         Welcome to TechNest
       </p>
 
-      <h1 class="text-5xl font-black leading-none mb-5 text-gray-900">
+      <h1 class="text-5xl font-black leading-none mb-5 text-gray-900 dark:text-white">
         Find your next gadget with a clean, modern shopping experience.
       </h1>
 
-      <p class="text-base text-gray-500 mb-8">
+      <p class="text-base text-gray-500 dark:text-gray-400 mb-8">
         Browse phones, laptops, tablets, and computing accessories.
       </p>
 
@@ -94,7 +94,7 @@ onMounted(() => {
 
         <button
           @click="goToDeals"
-          class="border border-gray-300 text-gray-700 hover:bg-gray-50 px-7 py-3 rounded-xl font-bold text-sm transition-colors"
+          class="border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 px-7 py-3 rounded-xl font-bold text-sm transition-colors"
         >
           View Deals
         </button>
@@ -102,35 +102,35 @@ onMounted(() => {
     </div>
 
     <!-- Right Side -->
-    <div class="bg-gray-50 border border-gray-200 rounded-2xl p-7">
-      <p class="text-gray-500 text-sm font-medium mb-5">
+    <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-7">
+      <p class="text-gray-500 dark:text-gray-400 text-sm font-medium mb-5">
         Quick stats
       </p>
 
       <div class="grid grid-cols-3 gap-3">
-        <div class="bg-white border border-gray-200 rounded-xl p-5 text-center">
-          <p class="text-2xl font-black text-gray-900">
+        <div class="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-5 text-center">
+          <p class="text-2xl font-black text-gray-900 dark:text-white">
             100+
           </p>
-          <p class="text-xs text-gray-500 mt-1.5">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1.5">
             Products
           </p>
         </div>
 
-        <div class="bg-white border border-gray-200 rounded-xl p-5 text-center">
-          <p class="text-2xl font-black text-gray-900">
+        <div class="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-5 text-center">
+          <p class="text-2xl font-black text-gray-900 dark:text-white">
             Top
           </p>
-          <p class="text-xs text-gray-500 mt-1.5">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1.5">
             Brands
           </p>
         </div>
 
-        <div class="bg-white border border-gray-200 rounded-xl p-5 text-center">
-          <p class="text-2xl font-black text-gray-900">
+        <div class="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-5 text-center">
+          <p class="text-2xl font-black text-gray-900 dark:text-white">
             Fast
           </p>
-          <p class="text-xs text-gray-500 mt-1.5">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1.5">
             Search
           </p>
         </div>
@@ -151,7 +151,7 @@ onMounted(() => {
     <h1 class="text-4xl font-bold mb-5">
       Products
     </h1> -->
-<section id="products" class="border-t border-gray-100">
+<section id="products" class="border-t border-gray-100 dark:border-gray-800">
 
 <div class="grid grid-cols-4 gap-5 max-w-7xl mx-auto px-6 py-10">
 
@@ -164,6 +164,8 @@ onMounted(() => {
   :image="product.thumbnail"
   :rating="product.rating"
   :discountPercentage="product.discountPercentage"
+  :brand="product.brand"  
+  :originalPrice="Math.round(product.price / (1 - product.discountPercentage / 100))"
 />
 
     </div>
