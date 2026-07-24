@@ -51,8 +51,8 @@ async function handleLogin() {
 
 </script>
 <template>
-      <div class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
-     <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 w-full max-w-sm">
+  <div class="min-h-[calc(100vh-120px)] flex items-center justify-center bg-gray-50 dark:bg-gray-950 px-4 py-8 sm:py-12">
+    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 sm:p-8 w-full max-w-sm sm:max-w-md shadow-sm">
   
 
 <!-- tab switcher — no v-if here, both buttons always show -->
@@ -84,16 +84,18 @@ async function handleLogin() {
   <input
     v-model="loginForm.username"
     type="text"
-    class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+    placeholder="Enter username"
+    class="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl px-4 py-2.5 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"/>
 
     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
   <input 
     v-model="loginForm.password"
     type="password"
-    class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+    placeholder="Enter password"
+    class="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl px-4 py-2.5 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"/>
   
     <button
-    @click="handleLogin" :disabled="authStore.isLoading" class="w-full bg-gray-900 text-white py-2 rounded-xl font-semibold hover:bg-gray-700 transition disabled:opacity-50">
+    @click="handleLogin" :disabled="authStore.isLoading" class="w-full bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 py-2.5 rounded-xl font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition disabled:opacity-50 text-sm">
 
 
     {{ authStore.isLoading ? 'Logging in...' : 'Login' }}
@@ -114,44 +116,56 @@ async function handleLogin() {
   {{ signupError }}
   </div>
 
-  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">First Name</label>
-  <input 
-    v-model="signupForm.firstName"
-    type="text"
-    class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+    <div>
+      <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">First Name</label>
+      <input 
+        v-model="signupForm.firstName"
+        type="text"
+        placeholder="John"
+        class="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl px-3.5 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"/>
+    </div>
 
-  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Last Name</label>
-  <input 
-    v-model="signupForm.lastName"
-    type="text"
-    class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+    <div>
+      <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Last Name</label>
+      <input 
+        v-model="signupForm.lastName"
+        type="text"
+        placeholder="Doe"
+        class="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl px-3.5 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"/>
+    </div>
+  </div>
 
-  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+  <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
   <input 
     v-model="signupForm.email"
     type="email"
-    class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+    placeholder="john@example.com"
+    class="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl px-3.5 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"/>
 
-  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
+  <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
   <input 
     v-model="signupForm.username"
     type="text"
-    class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+    placeholder="johndoe"
+    class="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl px-3.5 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"/>
     
-  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
+  <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
   <input 
     v-model="signupForm.password"
     type="password"
-    class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+    placeholder="••••••••"
+    class="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl px-3.5 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"/>
     
-  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Confirm Password</label>
+  <label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Confirm Password</label>
   <input 
     v-model="signupForm.confirm"
     type="password"
-    class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+    placeholder="••••••••"
+    class="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl px-3.5 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"/>
 
   <button
-    @click="handleSignup" :disabled="authStore.isLoading" class="w-full bg-gray-900 text-white py-2 rounded-xl font-semibold hover:bg-gray-700 transition disabled:opacity-50">
+    @click="handleSignup" :disabled="authStore.isLoading" class="w-full bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 py-2.5 rounded-xl font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition disabled:opacity-50 text-sm">
     {{ authStore.isLoading ? 'Signing up...' : 'Sign Up' }}
   </button>
 

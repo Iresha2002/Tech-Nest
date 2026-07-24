@@ -63,19 +63,19 @@ const submitForm = async () => {
 </script>
 
 <template>
-  <main class="max-w-6xl mx-auto px-6 py-12">
-    <div class="mb-10">
-      <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
+    <div class="mb-6 sm:mb-10">
+      <h1 class="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white mb-2">
         Support Center
       </h1>
 
-      <p class="text-gray-500 dark:text-gray-400">
+      <p class="text-sm sm:text-base text-gray-500 dark:text-gray-400">
         We're here to help — 7 days a week.
       </p>
     </div>
 
     <!-- Contact Cards -->
-    <div class="grid grid-cols-3 gap-4 mb-12">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 sm:mb-12">
       <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-5">
         <div class="text-3xl mb-3">📧</div>
         <p class="font-bold text-sm text-gray-900 dark:text-white mb-1">Email Us</p>
@@ -98,7 +98,7 @@ const submitForm = async () => {
       </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
       <!-- Form -->
       <div>
         <h2 class="text-xl font-black text-gray-900 dark:text-white mb-5">
@@ -107,7 +107,7 @@ const submitForm = async () => {
 
         <div
           v-if="submitted"
-          class="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-900 rounded-2xl p-10 text-center"
+          class="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-900 rounded-2xl p-8 sm:p-10 text-center"
         >
           <div class="text-5xl mb-4">✅</div>
 
@@ -121,7 +121,7 @@ const submitForm = async () => {
 
           <button
             @click="submitted = false; form = { name: '', email: '', subject: '', message: '' }"
-            class="bg-gray-900 text-white hover:bg-gray-700 px-5 py-2.5 rounded-xl text-sm font-bold transition-colors"
+            class="bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-700 px-5 py-2.5 rounded-xl text-sm font-bold transition-colors"
           >
             Send another
           </button>
@@ -129,9 +129,9 @@ const submitForm = async () => {
 
         <div
           v-else
-          class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 space-y-4"
+          class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-5 sm:p-6 space-y-4"
         >
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label class="block text-xs font-bold mb-1.5 uppercase tracking-wide text-gray-700 dark:text-gray-300">
                 Name *
@@ -195,7 +195,7 @@ const submitForm = async () => {
           <button
             @click="submitForm"
             :disabled="submitting || !form.name || !form.email || !form.message"
-            class="w-full py-3 rounded-xl font-bold text-sm bg-gray-900 text-white hover:bg-gray-700 disabled:bg-gray-400 dark:disabled:bg-gray-600 transition-colors"
+            class="w-full py-3 rounded-xl font-bold text-sm bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 disabled:bg-gray-400 dark:disabled:bg-gray-600 transition-colors"
           >
             {{ submitting ? 'Sending...' : 'Send Message' }}
           </button>

@@ -1,0 +1,29 @@
+The aim 01: Read and inspect the initial codebase structure and dependencies.
+Actual prompt: read the existing project in folder
+
+The aim 02: Implement complete mobile and tablet responsiveness across all pages.
+Actual prompt: it dosent resiponsive to mobile and tablet so make it resposive
+
+The aim 03: Authorize and execute the implementation plan for responsive layouts.
+Actual prompt: proceed
+
+The aim 04: Verify the responsiveness updates locally and check live preview status.
+Actual prompt: is it respovive it now
+
+The aim 05: Inquire about standard mobile viewport dimensions for DevTools testing.
+Actual prompt: what is the dimension size of moblie
+
+The aim 06: Refine component layouts, 2-column mobile grids, and iPad header responsiveness based on visual screenshots.
+Actual prompt: components not look good in mobile and ipad veiw
+
+The aim 07: Evaluate the codebase against the official CS3404 assignment requirements PDF.
+Actual prompt: does this project fulfill the reqiuements ask by this pdf
+
+The aim 08: Continue refining type definitions and removing any strict typing workarounds.
+Actual prompt: Continue
+
+The aim 09: Wrap up active development tasks and clean up running background servers.
+Actual prompt: ok end the task
+
+The aim 10: Generate all submission files required by the assignment guidelines (README.md, Report document, prompts.txt).
+Actual prompt: create requred submission files

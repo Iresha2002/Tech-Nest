@@ -1,16 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import ProductCard from '../components/ProductCard.vue'
-// import LoadingSpinner from '../components/LoadingSpinner.vue'
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 
-type Product = {
-  id: number
-  title: string
-  price: number
-  thumbnail: string
-  rating: number
-  discountPercentage: number
-}
+import type { Product } from '../types'
 
 const TECH_SLUGS = [
   'smartphones',
@@ -94,51 +87,51 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="max-w-7xl mx-auto px-6 py-12">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
 
-    <div class="mb-8">
-      <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
+    <div class="mb-6 sm:mb-8">
+      <h1 class="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white mb-2">
         🔥 Hot Deals
       </h1>
 
-      <p class="text-base text-gray-500 dark:text-gray-400">
+      <p class="text-sm sm:text-base text-gray-500 dark:text-gray-400">
         Products with more than {{ MIN_DISCOUNT }}% discount. Best deals first.
       </p>
     </div>
 
     <div
       v-if="!isLoading && deals.length > 0"
-      class="grid grid-cols-3 gap-4 mb-8"
+      class="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8"
     >
-      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-5 text-center">
-        <p class="text-2xl font-black text-gray-900 dark:text-white">
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-3 sm:p-5 text-center">
+        <p class="text-lg sm:text-2xl font-black text-gray-900 dark:text-white">
           {{ deals.length }}
         </p>
-        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">
           Deals found
         </p>
       </div>
 
-      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-5 text-center">
-        <p class="text-2xl font-black text-gray-900 dark:text-white">
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-3 sm:p-5 text-center">
+        <p class="text-lg sm:text-2xl font-black text-gray-900 dark:text-white">
           {{ MIN_DISCOUNT }}%+
         </p>
-        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">
           Min. discount
         </p>
       </div>
 
-      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-5 text-center">
-        <p class="text-2xl font-black text-gray-900 dark:text-white">
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-3 sm:p-5 text-center">
+        <p class="text-lg sm:text-2xl font-black text-gray-900 dark:text-white">
           ${{ averageSaving }}
         </p>
-        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">
           Avg. saving
         </p>
       </div>
     </div>
 
-    <div class="flex items-center justify-between mb-6">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-6">
       <p class="text-sm text-gray-500 dark:text-gray-400">
         <span class="text-gray-900 dark:text-white font-bold">
           {{ deals.length }}
@@ -148,7 +141,7 @@ onMounted(() => {
 
       <select
         v-model="sortBy"
-        class="text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 rounded-xl focus:outline-none w-52"
+        class="text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 rounded-xl focus:outline-none w-full sm:w-52"
       >
         <option value="discount">Biggest Discount First</option>
         <option value="price-asc">Price: Low → High</option>
@@ -186,7 +179,7 @@ onMounted(() => {
 
     <div
       v-else
-      class="grid grid-cols-4 gap-5"
+      class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5"
     >
       <ProductCard
         v-for="product in deals"
@@ -197,6 +190,8 @@ onMounted(() => {
         :image="product.thumbnail"
         :rating="product.rating"
         :discount-percentage="product.discountPercentage"
+        :brand="product.brand"
+        :original-price="Math.round(product.price / (1 - (product.discountPercentage || 0) / 100))"
       />
     </div>
 
